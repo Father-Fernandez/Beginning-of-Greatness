@@ -3,7 +3,7 @@ import pygame
 
 pygame.init()
 
-# i want to commit seppuku very badly
+#Characters and quotes theyve said
 Candy = ["You meet these people over and over again or rather you don’t meet them\n because everyone is generically "
          "trying to appeal to the largest number of people", "A certain level of conventional beauty conventional "
                                                              "beauty mitigates\n that same level of craziness",
@@ -91,11 +91,11 @@ Flossy = ["what if your carefully crafted persona\n came at the expense of devel
 Black = (0, 0, 0)
 White = (255, 255, 255)
 Blue = (0, 0, 255)
-window = pygame.display.set_mode((800, 600))
+window = pygame.display.set_mode((1000, 700))
 Red = (255, 0, 0)
 Dark_Red = (185, 0, 0)
 name = ['Candy', 'Jeremy', 'Greg', 'Safra', 'Martha', 'Ted', 'Jackson', 'Flossy']
-x = 100
+x = 800
 y = 250
 Width = 175
 Height = 125
@@ -107,7 +107,7 @@ random_message = pygame.font.SysFont('Comic sans', 25)
 clock = pygame.time.Clock()
 
 
-# im in immense french bread
+#to randomly choose the different names and quotes theyve said
 def random_phrase_generation():
     Character = random.choice(name)
     Character_name = (Character + ": ")
@@ -129,7 +129,7 @@ def random_phrase_generation():
         print(Character_name + random.choice(Safra))
 
 
-class DrawTheMotherFuckingButton():
+class DrawTheButton():
     def __init__(self, Colour, x, y, Width, Height, Text='',):
         self.Colour = Colour
         self.x = x
@@ -138,17 +138,18 @@ class DrawTheMotherFuckingButton():
         self.Height = Height
         self.Text = Text
 
-    def drawing_the_damn_shit_already(self, window, outline=True):
+#draw the button on the screen
+    def drawing(self, window, outline=True):
         if outline:
             pygame.draw.rect(window, White, (self.x - 4, self.y - 4, self.Width + 8, self.Height + 8), 0)
-
         pygame.draw.rect(window, self.Colour, (self.x, self.y, self.Width, self.Height,))
 
+#putting a text in the center of the box
         if self.Text != '':
             font = pygame.font.SysFont('Comic sans', 25)
             text = font.render(self.Text, True, (0, 0, 0))
             window.blit(text, (self.x + (self.Width / 2 - 150 / 2), self.y + (self.Height / 2 - 30 / 2)))
-
+#getting the position of the mouse on the screen to change the colour of the box
     def mouse_position(self, pos):
         if pos[0] > self.x and pos[0] < self.x + self.Width:
             if pos[1] > self.y and pos[1] < self.y + self.Height:
@@ -156,13 +157,13 @@ class DrawTheMotherFuckingButton():
 
         return False
 
-
 running = True
-RedButton = DrawTheMotherFuckingButton(Red, x, y, Width, Height, 'CLICK FOR HAHA')
+RedButton = DrawTheButton(Red, x, y, Width, Height, 'CLICK ME')
 
+#operation to get everything running
 while running:
     window.fill(Black)
-    RedButton.drawing_the_damn_shit_already(window)
+    RedButton.drawing(window)
     for event in pygame.event.get():
         pos = pygame.mouse.get_pos()
         if event.type == Clicked:
